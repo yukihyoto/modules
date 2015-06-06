@@ -73,11 +73,11 @@ class mirror_controller(object):
         self.get_count()
         return
     
-    def move_r(self, lock=True):
+    def move_n(self, lock=True):
         """
-        Move to R position.
+        Move to N position.
         
-        NOTE: If the slider is already at R position, it doesn't move.
+        NOTE: If the slider is already at N position, it doesn't move.
         
         Args
         ====
@@ -91,17 +91,17 @@ class mirror_controller(object):
         
         Examples
         ========
-        >>> s.move_r()
+        >>> s.move_n()
         """
-        self.move(self.pos_r, lock)
-        self.position = 'R'
+        self.move(self.pos_n, lock)
+        self.position = 'N'
         return
     
-    def move_sky(self, lock=True):
+    def move_smart(self, lock=True):
         """
-        Move to SKY position.
+        Move to SMART position.
         
-        NOTE: If the slider is already at SKY position, it doesn't move.
+        NOTE: If the slider is already at SMART position, it doesn't move.
         
         Args
         ====
@@ -115,36 +115,12 @@ class mirror_controller(object):
         
         Examples
         ========
-        >>> s.move_sky()
+        >>> s.move_smart()
         """
         self.move(self.pos_sky, lock)
-        self.position = 'SKY'
+        self.position = 'SMART'
         return
-    
-    def move_sig(self, lock=True):
-        """
-        Move to SIG position.
-        
-        NOTE: If the slider is already at SIG position, it doesn't move.
-        
-        Args
-        ====
-        < lock : bool :  > (optional)
-            If <lock> is False, the method returns immediately.
-            Otherwise, it returns after the slider stopped.
-        
-        Returns
-        =======
-        Nothing.
-        
-        Examples
-        ========
-        >>> s.move_sig()
-        """
-        self.move(self.pos_sig, lock)
-        self.position = 'SIG'
-        return
-    
+   
     def unlock_brake(self):
         """
         Unlock the electromagnetic brake of the slider.
@@ -237,10 +213,7 @@ class mirror_controller(object):
         
     def read_count(self):
         return self.count
-        
-    def shutdown(self):
-        self.shutdown_flag = True
-        return
+    
     
     def slider():
         client = pyinterface.server_client_wrapper.control_client_wrapper(
