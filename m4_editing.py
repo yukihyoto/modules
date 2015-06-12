@@ -117,7 +117,7 @@ class mirror_controller(object):
         ========
         >>> s.move_smart()
         """
-        self.move(self.pos_sky, lock)
+        self.move(self.pos_smart, lock)
         self.position = 'SMART'
         return
    
@@ -137,7 +137,7 @@ class mirror_controller(object):
         ========
         >>> s.unlock_brake()
         """
-        self.mtr.do_output(2, 0)
+        self.mtr.do_output( , )
         msg = '!! Electromagnetic brake is now UNLOCKED !!'
         print('*'*len(msg))
         print(msg)
@@ -160,7 +160,7 @@ class mirror_controller(object):
         ========
         >>> s.lock_brake()
         """
-        self.mtr.do_output(0)
+        self.mtr.do_output()
         self.get_count()
         print('')
         print('')
@@ -186,7 +186,7 @@ class mirror_controller(object):
         ========
         >>> s.clear_alarm()
         """
-        self.mtr.do_output(1)
+        self.mtr.do_output()
         return
         
     def clear_interlock(self):
