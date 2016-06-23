@@ -2,10 +2,7 @@
 #-*- coding: utf-8 -*-
 
 import time
-#import subprocess as sub
 import geomech
-
-#ret6 = dome.start_dome_server()
 
 ret0 = geomech.start_geomech_server()
 ret1 = geomech.geomech_client('172.20.0.12',8100)
