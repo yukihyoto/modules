@@ -21,20 +21,19 @@ status = geomech.geomech_monitor_client('172.20.0.12',8101)
 
 
 while(1):
-	# Calculate current MJD
-	tv = time.time()
-	mjd = tv/24./3600. + 40587.0 # 40587.0 = MJD0
-	mid = int(mjd)
-	ntime = dt.now()
-	secofday = ntime.hour*60*60 + ntime.minute*60 + ntime.second + ntime.microsecond*0.000001
-	#data = [geo_x, geo_y]
-	data = status.read_geomech_col()
-	ntime2 = dt.now()
-	secofday2 = ntime2.hour*60*60 + ntime2.minute*60 + ntime2.second + ntime2.microsecond*0.000001
-	
-	log = str(mjd) + ' ' + str(secofday) + ' ' + str(secofday2) + str(data[0])+ ' ' + str(data[1])
+  # Calculate current MJD
+  tv = time.time()
+  mjd = tv/24./3600. + 40587.0 # 40587.0 = MJD0
+  mid = int(mjd)
+  ntime = dt.now()
+  secofday = ntime.hour*60*60 + ntime.minute*60 + ntime.second + ntime.microsecond*0.000001
+  #data = [geo_x, geo_y]
+  data = status.read_geomech_col()
+  ntime2 = dt.now()
+  secofday2 = ntime2.hour*60*60 + ntime2.minute*60 + ntime2.second + ntime2.microsecond*0.000001
 
-	f.write(log + "\n")
-	print log
+  log = str(mjd) + ' ' + str(secofday) + ' ' + str(secofday2) + str(data[0])+ ' ' + str(data[1])
+  f.write(log + "\n")
+  print log
 	
   time.sleep(0.1)
