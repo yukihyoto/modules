@@ -32,7 +32,7 @@ while(1):
   ntime2 = dt.now()
   secofday2 = ntime2.hour*60*60 + ntime2.minute*60 + ntime2.second + ntime2.microsecond*0.000001
 
-  log = str(mjd) + ' ' + str(secofday) + ' ' + str(secofday2) + str(data[0])+ ' ' + str(data[1])
+  log = str(mjd) + ' ' + str(secofday) + ' ' + str(data[0])+ ' ' + str(data[1])
   f.write(log + "\n")
   print log
 	
