@@ -1,7 +1,7 @@
 if __name__ == "__main__" :
   
-  f = open("geomech_log_20160701_1.txt","r")
-  newfile = open("geomech_log_20160701_1e","w")
+  f = open("geomech_log_201607011814JST.txt","r")
+  newfile = open("geomech_log_201607011814JST_e1.txt","w")
   
   
   # 6000 point = 10 min, 864000 point = 1 day, 2592000 point = 3 days
