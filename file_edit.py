@@ -17,3 +17,6 @@ if __name__ == "__main__" :
     if flag = 1 :
       newfile.write(line)
       flag = 0
+    else :
+      pass
+    
