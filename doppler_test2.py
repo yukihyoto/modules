@@ -154,8 +154,7 @@ class doppler_nanten (object):
 
         ranow=ra_2000
         delnow=dec_2000
-        ret =
-        .slaPreces( "FK5", 2000.,2000.+tu*100.,ranow,delnow)
+        ret =slalib.sla_preces( "FK5", 2000.,2000.+tu*100.,ranow,delnow)
         ranow = ret[0]
         delnow = ret[1]
 
