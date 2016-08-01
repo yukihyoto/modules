@@ -67,8 +67,8 @@ class doppler_nanten (object):
         """
         setting 2ndLO
         """
-        coord = self.dic1[coord]
-        offset_coord = self.dic1[offset_coord]
+        coord = self.coord_dict[coord]
+        offset_coord = self.coord_dict[offset_coord]
         mjd = 40587.0 + time.time()/(24.*3600.)
         vobs_mjd = mjd + stime/24./3600.
         vobs = self.get_vobs(vobs_mjd,math.radians(x),math.radians(y),coord,
@@ -107,7 +107,7 @@ class doppler_nanten (object):
         return {"freq":freq, "power":power}
     """
     def get_vobs(self, mjdtmp, xtmp, ytmp, mode, offx, offy, dcos, offmode):
-        if offmode == self.dic1["COORD_SAME"] | offmode == mode :
+        if offmode == self.coord_dict["SAME"] | offmode == mode :
             ytmp += offy
             if dcos == 0 :
                 xtmp += offx
@@ -116,14 +116,14 @@ class doppler_nanten (object):
         else :
             print("error coord != off_coord")
             pass
-        if mode == self.dic1["COORD_J2000"] :
+        if mode == self.coord_dict["J2000"] :
             xxtmp = xtmp
             yytmp = ytmp
-        elif mode == self.dic1["COORD_B1950"] :
+        elif mode == self.coord_dict["B1950"] :
             ret = slalib.sla_fk45z(xtmp, ytmp, 1950)
             xxtmp = ret[0]
             yytmp = ret[1]
-        elif mode == self.dic1["COORD_LB"] :
+        elif mode == self.coord_dict["LB"] :
             ret = slalib.sla_galeq(xtmp, ytmp)
             xxtmp = ret[0]
             yytmp = ret[1]
