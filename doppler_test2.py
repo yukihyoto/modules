@@ -67,11 +67,12 @@ class doppler_nanten (object):
         """
         setting 2ndLO
         """
+        coord = dic1[coord]
+        offset_coord = dic1[offset_coord]
         mjd = 40587.0 + time.time()/(24.*3600.)
-        coord = self.coord_dict[coord.upper()]
         vobs_mjd = mjd + stime/24./3600.
-        vobs = get_vobs(vobs_mjd,math.radians(x),math.radians(y),coord,
-                        off__x, offset_y, offset_dcos, offset_coord)
+        vobs = self.get_vobs(vobs_mjd,math.radians(x),math.radians(y),coord,
+                             off__x, offset_y, offset_dcos, offset_coord)
         c = dic1["LIGHT_SPEED"]
         for band in range(1, bandnum+1):
             rf = dic1["restFreq"]
@@ -106,7 +107,7 @@ class doppler_nanten (object):
         return {"freq":freq, "power":power}
     """
     def get_vobs(self, mjdtmp, xtmp, ytmp, mode, offx, offy, dcos, offmode):
-        if offmode == COORD_SAME | offmode == mode :
+        if offmode == dic1["COORD_SAME"] | offmode == mode :
             ytmp += offy
             if dcos == 0 :
                 xtmp += offx
@@ -115,14 +116,14 @@ class doppler_nanten (object):
         else :
             print("error coord != off_coord")
             pass
-        if mode == COORD_J2000 :
+        if mode == dic1["COORD_J2000"] :
             xxtmp = xtmp
             yytmp = ytmp
-        elif mode == COORD_B1950 :
+        elif mode == dic1["COORD_B1950"] :
             ret = slalib.sla_fk45z(xtmp, ytmp, 1950)
             xxtmp = ret[0]
             yytmp = ret[1]
-        elif mode == COORD_LB :
+        elif mode == dic1["COORD_LB"] :
             ret = slalib.sla_galeq(xtmp, ytmp)
             xxtmp = ret[0]
             yytmp = ret[1]
@@ -130,7 +131,7 @@ class doppler_nanten (object):
             xxtmp = xtmp
             yytmp = ytmp
 
-        vobs = calc_vobs(mjdtmp+2400000.5, xxtmp, yytmp)
+        vobs = self.calc_vobs(mjdtmp+2400000.5, xxtmp, yytmp)
         return vobs
 
     def calc_vobs(self, jd, ra_2000, dec_2000):
@@ -143,6 +144,7 @@ class doppler_nanten (object):
         v_rot = [0.,0.,0.]
         v2 = [0.,0.,0.]
         solx = [0.,0.,0.]
+        solx1 = [0.,0.,0.]
         solv = [0.,0.,0.]
         DEG2RAD = math.pi/180.
         SEC2RAD = 2*math.pi/24.*60.*60.
@@ -300,7 +302,7 @@ class doppler_nanten (object):
     	vobs = vobs - (solv[0] * x[0] + solv[1] * x[1] + solv[2] * x[2])
     	vobs = -vobs
 
-    	printf("vobs=%f\n",vobs)
+    	print("vobs=%f\n" % vobs)
         """
         if gcalc_flag == 1 :
     		return vobs
