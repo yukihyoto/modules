@@ -146,6 +146,24 @@ class doppler_nanten (object):
         solv = [0.,0.,0.]
         DEG2RAD = math.pi/180.
         ARCSEC2RAD = math.pi/(180.*3600.)
+        glongitude = 138.472153 * math.pi/180.
+        glatitude = 35.940874 * math.pi/180.
+        gheight = 1386
+
+        #gdut1 = -0.14
+        #gstop_flag = 1
+        #gkisa = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+        #gtemperature = 273.0
+        #gpressure = 860
+        #ghumidity = 0.2
+        #gtlr = 0.0065
+        #tai_utc = 34.0
+        #instruction = 0
+        #target_changed = 1
+
+
+
+
 
         a = math.cos(dec_2000)
         x_2000[0] = a*math.cos(ra_2000)
@@ -214,7 +232,7 @@ class doppler_nanten (object):
     	v_rev[2] = v[1] * math.sin(e * ARCSEC2RAD) + v[2] * math.cos(e * ARCSEC2RAD)
 
     	v_e = (465.1e-3) * (1.+0.0001568*gheight/1000.) \
-    	  * math.cos(glatitude)/sqrt(1.+0.0066945*math.pow(math.sin(glatitude),2.0))
+    	  * math.cos(glatitude)/math.sqrt(1.+0.0066945*math.pow(math.sin(glatitude),2.0))
 
     	am = 18.*3600.+41.*60.+50.54841+8640184.812866*tu \
     	               +0.093104*tu*tu-0.0000062*tu*tu*tu
