@@ -119,11 +119,11 @@ class doppler_nanten (object):
             xxtmp = xtmp
             yytmp = ytmp
         elif mode == COORD_B1950 :
-            ret = slalib.slaFk45z(xtmp, ytmp, 1950)
+            ret = slalib.sla_fk45z(xtmp, ytmp, 1950)
             xxtmp = ret[0]
             yytmp = ret[1]
         elif mode == COORD_LB :
-            ret = slalib.slaGaleq(xtmp, ytmp)
+            ret = slalib.sla_galeq(xtmp, ytmp)
             xxtmp = ret[0]
             yytmp = ret[1]
         else :
@@ -135,7 +135,7 @@ class doppler_nanten (object):
 
     def calc_vobs(self, jd, ra_2000, dec_2000):
 
-        x2000 = [0.,0.,0.]
+        x_2000 = [0.,0.,0.]
         x = [0.,0.,0.]
         x1 = [0.,0.,0.]
         v = [0.,0.,0.]
@@ -154,7 +154,8 @@ class doppler_nanten (object):
 
         ranow=ra_2000
         delnow=dec_2000
-        ret = slalib.slaPreces( "FK5", 2000.,2000.+tu*100.,ranow,delnow)
+        ret =
+        .slaPreces( "FK5", 2000.,2000.+tu*100.,ranow,delnow)
         ranow = ret[0]
         delnow = ret[1]
 
@@ -163,7 +164,7 @@ class doppler_nanten (object):
         x[1]=a*math.sin(ranow)
         x[2]=math.sin(delnow)
 
-        ret = slalib.slaNutc(jd-2400000.5)#radian
+        ret = slalib.sla_nutc(jd-2400000.5)#radian
         nut_long = ret[0]
         nut_obliq = ret[1]
         eps0 = ret[2]
@@ -255,7 +256,7 @@ class doppler_nanten (object):
     	rasol=18.*15. *DEG2RAD
     	delsol=30.*DEG2RAD
 
-    	ret = slalib.slaPreces( "FK4", 1900.,2000.+tu*100., rasol, delsol)
+    	ret = slalib.sla_preces( "FK4", 1900.,2000.+tu*100., rasol, delsol)
         rasol = ret[0]
         delsol = ret[1]
 
