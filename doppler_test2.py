@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
 #import csv
-import pyslalib from slalib
+from pyslalib import slalib
 #import SG
 import math
 import time
@@ -14,7 +14,7 @@ class doppler(object):
     def callibrate_doppler(self, x, y, coord, offset_x=0, offset_y=0,
                            offset_dcos=1, offset_coord="SAME",
                            vlsrs=0., stime=0):
-        """ドップラーシフトの補正"""
+        #ドップラーシフトの補正
 
         vobs = self.doppler.set_track(x, y, coord, vlsrs, offset_x, offset_y,
                                       offset_dcos, offset_coord, stime)
@@ -23,16 +23,16 @@ class doppler(object):
 class doppler_nanten (object):
 
     #PATH_DEVICE_TABLE = "/home/amigos/NECST/soft/obs/params/device_table.prm"
-    bandnum = 2
-    restFreq =
-    vlsr = 0
-    "1stsb1" =
-    "1stsb2" =
-    "2ndLO1" =
-    "2ndLO2" =
-    power_sg21 = 13.0
-    power_sg22 = 13.0
-    LIGHT_SPEED =　299792.458
+    dic1 = {"bandnum":2,
+            "restFreq":230538.0
+            "vlsr":0
+            "1stsb1":1
+            "1stsb2":1
+            "2ndLO1":3985.5
+            "2ndLO2":3985.5
+            "power_sg21":13.0
+            "power_sg22":13.0
+            "LIGHT_SPEED":299792.458 }
 
 
     coord_dict = {"J2000"     : 1,
@@ -40,7 +40,7 @@ class doppler_nanten (object):
                    "LB"        : 3,
                    "GALACTIC"  : 3,
                    "APPARENT"  : 10,
-                   "HORIZONTAL": "COORD_HORIZONTAL",
+                   #"HORIZONTAL": "COORD_HORIZONTAL",
                    "SAME"      : 0}
 
 
@@ -69,9 +69,9 @@ class doppler_nanten (object):
             rf = restFreq
             vdiff = vobs - vlsr
             fdiff = vdiff / c * rf
-            if "1stsb%d"%(band) == "U":
+            if "1stsb%d"%(band) == 1:
                 sb = 1
-            if "1stsb%d"%(band) == "L":
+            if "1stsb%d"%(band) == -1:
                 sb = -1
             set_freq = "2ndLO%d"%(band) + sb * fdiff
             if band == 1:
