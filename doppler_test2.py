@@ -22,6 +22,7 @@ class doppler(object):
 """
 class doppler_nanten (object):
 
+
     #PATH_DEVICE_TABLE = "/home/amigos/NECST/soft/obs/params/device_table.prm"
     dic1 = {"bandnum":2,
             "restFreq":230538.0,
@@ -42,6 +43,15 @@ class doppler_nanten (object):
                    "APPARENT"  : 10,
                    #"HORIZONTAL": "COORD_HORIZONTAL",
                    "SAME"      : 0}
+    self.x2000 = [0,0,0]
+    self.x = [0,0,0]
+    self.x1 = [0,0,0]
+    self.v = [0,0,0]
+    self.v_ref = [0,0,0]
+    self.v_rot = [0,0,0]
+    self.v2 = [0,0,0]
+    self.solx = [0,0,0]
+    self.solv = [0,0,0]
 
 
 
@@ -128,17 +138,6 @@ class doppler_nanten (object):
         return vobs
 
     def calc_vobs(self, jd, ra_2000, dec_2000):
-
-        self.x2000 = [0,0,0]
-        self.x = [0,0,0]
-        self.x1 = [0,0,0]
-        self.v = [0,0,0]
-        self.v_ref = [0,0,0]
-        self.v_rot = [0,0,0]
-        self.v2 = [0,0,0]
-        self.solx = [0,0,0]
-        self.solv = [0,0,0]
-
 
         a = math.cos(dec_2000)
         self.x_2000[0] = a*math.cos(ra_2000)
