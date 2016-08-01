@@ -72,7 +72,7 @@ class doppler_nanten (object):
         mjd = 40587.0 + time.time()/(24.*3600.)
         vobs_mjd = mjd + stime/24./3600.
         vobs = self.get_vobs(vobs_mjd,math.radians(x),math.radians(y),coord,
-                             off__x, offset_y, offset_dcos, offset_coord)
+                             offset_x, offset_y, offset_dcos, offset_coord)
         c = self.dic1["LIGHT_SPEED"]
         for band in range(1, bandnum+1):
             rf = self.dic1["restFreq"]
