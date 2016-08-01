@@ -139,12 +139,13 @@ class doppler_nanten (object):
         x = [0.,0.,0.]
         x1 = [0.,0.,0.]
         v = [0.,0.,0.]
-        v_ref = [0.,0.,0.]
+        v_rev = [0.,0.,0.]
         v_rot = [0.,0.,0.]
         v2 = [0.,0.,0.]
         solx = [0.,0.,0.]
         solv = [0.,0.,0.]
         DEG2RAD = math.pi/180.
+        ARCSEC2RAD = math.pi/(180.*3600.)
 
         a = math.cos(dec_2000)
         x_2000[0] = a*math.cos(ra_2000)
