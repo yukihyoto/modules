@@ -37,33 +37,38 @@ class doppler_nanten (object):
 
 
     coord_dict = {"J2000"     : 1,
-                   "B1950"     : 2,
-                   "LB"        : 3,
-                   "GALACTIC"  : 3,
-                   "APPARENT"  : 10,
-                   #"HORIZONTAL": "COORD_HORIZONTAL",
-                   "SAME"      : 0}
-    self.x2000 = [0,0,0]
-    self.x = [0,0,0]
-    self.x1 = [0,0,0]
-    self.v = [0,0,0]
-    self.v_ref = [0,0,0]
-    self.v_rot = [0,0,0]
-    self.v2 = [0,0,0]
-    self.solx = [0,0,0]
-    self.solv = [0,0,0]
+                  "B1950"     : 2,
+                  "LB"        : 3,
+                  "GALACTIC"  : 3,
+                  "APPARENT"  : 10,
+                  #"HORIZONTAL": "COORD_HORIZONTAL",
+                  "SAME"      : 0}
+
 
 
 
 
     def __init__(self):
+
         #self.sg2if1 = SG.secondsg01()
         #self.sg2if2 = SG.secondsg02()
+
+        self.x2000 = [0,0,0]
+        self.x = [0,0,0]
+        self.x1 = [0,0,0]
+        self.v = [0,0,0]
+        self.v_ref = [0,0,0]
+        self.v_rot = [0,0,0]
+        self.v2 = [0,0,0]
+        self.solx = [0,0,0]
+        self.solv = [0,0,0]
+
         """
         for record in csv.reader(open(PATH_DEVICE_TABLE,"r")):
             r_dict[record[0]] =record[1]
             continue
         """
+
         pass
 
     def set_track(self, x, y, coord, vlsr,
