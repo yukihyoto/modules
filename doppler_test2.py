@@ -145,7 +145,9 @@ class doppler_nanten (object):
         solx = [0.,0.,0.]
         solv = [0.,0.,0.]
         DEG2RAD = math.pi/180.
+        SEC2RAD = 2*math.pi/24.*60.*60.
         ARCSEC2RAD = math.pi/(180.*3600.)
+        RAD2DEG = 180./math.pi
         glongitude = 138.472153 * math.pi/180.
         glatitude = 35.940874 * math.pi/180.
         gheight = 1386
