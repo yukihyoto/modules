@@ -64,7 +64,7 @@ class doppler_nanten (object):
         vobs_mjd = mjd + stime/24./3600.
         vobs = get_vobs(vobs_mjd,math.radians(x),math.radians(y),coord,
                         off__x, offset_y, offset_dcos, offset_coord)
-        c =　dic1["LIGHT_SPEED"]
+        c = dic1["LIGHT_SPEED"]
         for band in range(1, bandnum+1):
             rf = dic1["restFreq"]
             vdiff = vobs - dic1["vlsr"]
@@ -82,7 +82,7 @@ class doppler_nanten (object):
                 #self.sg2if2.set_sg(set_freq,power_sg22)
                 vdiff_22 = vdiff
                 fdiff_22 = fdiff
-                
+
         Vdiff = {"sg21":vdiff_21, "sg22":vdiff_22}
         Fdiff = {"sg21":fdiff_21, "sg22":fdiff_22}
         return vobs,Vdiff,Fdiff
@@ -260,10 +260,11 @@ class doppler_nanten (object):
     	vobs = -vobs
 
     	printf("vobs=%f\n",vobs)
-    	if (gcalc_flag == 1):
+        """
+        if gcalc_flag == 1 :
     		return vobs
 
-    	else if (gcalc_flag == 2):
+    	else gcalc_flag == 2:
     		return lst
-
+        """
     	return vobs
