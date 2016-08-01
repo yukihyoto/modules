@@ -144,6 +144,7 @@ class doppler_nanten (object):
         v2 = [0.,0.,0.]
         solx = [0.,0.,0.]
         solv = [0.,0.,0.]
+        DEG2RAD = math.pi/180.
 
         a = math.cos(dec_2000)
         x_2000[0] = a*math.cos(ra_2000)
