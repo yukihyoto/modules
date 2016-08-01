@@ -24,14 +24,14 @@ class doppler_nanten (object):
 
     #PATH_DEVICE_TABLE = "/home/amigos/NECST/soft/obs/params/device_table.prm"
     dic1 = {"bandnum":2,
-            "restFreq":230538.0
-            "vlsr":0
-            "1stsb1":1
-            "1stsb2":1
-            "2ndLO1":3985.5
-            "2ndLO2":3985.5
-            "power_sg21":13.0
-            "power_sg22":13.0
+            "restFreq":230538.0,
+            "vlsr":0,
+            "1stsb1":1,
+            "1stsb2":1,
+            "2ndLO1":3985.5,
+            "2ndLO2":3985.5,
+            "power_sg21":13.0,
+            "power_sg22":13.0,
             "LIGHT_SPEED":299792.458 }
 
 
@@ -64,16 +64,16 @@ class doppler_nanten (object):
         vobs_mjd = mjd + stime/24./3600.
         vobs = get_vobs(vobs_mjd,math.radians(x),math.radians(y),coord,
                         off__x, offset_y, offset_dcos, offset_coord)
-        c =　LIGHT_SPEED
+        c =　dic1["LIGHT_SPEED"]
         for band in range(1, bandnum+1):
-            rf = restFreq
-            vdiff = vobs - vlsr
+            rf = dic1["restFreq"]
+            vdiff = vobs - dic1["vlsr"]
             fdiff = vdiff / c * rf
-            if "1stsb%d"%(band) == 1:
+            if dic1["1stsb%d"%(band)] == 1:
                 sb = 1
-            if "1stsb%d"%(band) == -1:
+            if dic1["1stsb%d"%(band)] == -1:
                 sb = -1
-            set_freq = "2ndLO%d"%(band) + sb * fdiff
+            set_freq = dic1["2ndLO%d"%(band)] + sb * fdiff
             if band == 1:
                 #self.sg2if1.set_sg(set_freq,power_sg21)
                 vdiff_21 = vdiff
@@ -82,7 +82,7 @@ class doppler_nanten (object):
                 #self.sg2if2.set_sg(set_freq,power_sg22)
                 vdiff_22 = vdiff
                 fdiff_22 = fdiff
-            continue
+                
         Vdiff = {"sg21":vdiff_21, "sg22":vdiff_22}
         Fdiff = {"sg21":fdiff_21, "sg22":fdiff_22}
         return vobs,Vdiff,Fdiff
