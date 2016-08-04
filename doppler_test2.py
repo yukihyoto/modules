@@ -176,7 +176,7 @@ class doppler_nanten (object):
         solv = [0.,0.,0.]
         DEG2RAD = math.pi/180.
         SEC2RAD = (2*math.pi)/(24.*60.*60.)
-        ARCSEC2RAD = math.pi/(180.*3600.)
+        ARCSEC2RAD = math.pi/(180.*60.*60.)
         RAD2DEG = 180./math.pi
         #1.85m at nobeyama
         #glongitude = 138.472153 * math.pi/180.
@@ -212,7 +212,7 @@ class doppler_nanten (object):
         x_2000[1] = a*math.sin(ra_2000)
         x_2000[2] = math.sin(dec_2000)
 
-        tu = (jd - 2451545.) / 36525.
+        tu= (jd - 2451545.) / 36525.
 
         ranow=ra_2000
         delnow=dec_2000
@@ -234,7 +234,7 @@ class doppler_nanten (object):
         x1[0]=x[0]-(x[1]*math.cos(eps0)+x[2]*math.sin(eps0))*nut_long
         x1[1]=x[1]+x[0]*math.cos(eps0)*nut_long - x[2]*nut_obliq
         x1[2]=x[2]+x[0]*math.sin(eps0)*nut_long + x[1]*nut_obliq
-        
+
         """
         x1[0]=x[0]-(x[1]*math.cos(nut_obliq)+x[2]*math.sin(nut_obliq))*nut_long
         x1[1]=x[1]+x[0]*math.cos(nut_obliq)*nut_long - x[2]*nut_obliq
