@@ -230,16 +230,16 @@ class doppler_nanten (object):
         nut_obliq = ret[1]
         eps0 = ret[2]
 
-
+        """
         x1[0]=x[0]-(x[1]*math.cos(eps0)+x[2]*math.sin(eps0))*nut_long
         x1[1]=x[1]+x[0]*math.cos(eps0)*nut_long - x[2]*nut_obliq
         x1[2]=x[2]+x[0]*math.sin(eps0)*nut_long + x[1]*nut_obliq
-
         """
+
         x1[0]=x[0]-(x[1]*math.cos(nut_obliq)+x[2]*math.sin(nut_obliq))*nut_long
         x1[1]=x[1]+x[0]*math.cos(nut_obliq)*nut_long - x[2]*nut_obliq
         x1[2]=x[2]+x[0]*math.sin(nut_obliq)*nut_long + x[1]*nut_obliq
-        """
+        
         x[0]=x1[0]
         x[1]=x1[1]
         x[2]=x1[2]
@@ -322,11 +322,11 @@ class doppler_nanten (object):
     	vobs = -(v2[0] * x_2000[0] + v2[1] * x_2000[1] + v2[2] * x_2000[2])
     	rasol=18.*15. *DEG2RAD
     	delsol=30.*DEG2RAD
-
+        """
     	ret = slalib.sla_preces( "FK4", 1900.,2000.+tu*100., rasol, delsol)
         """
     	ret = slalib.sla_preces( "FK4", 1950.,2000.+tu*100., rasol, delsol)
-        """
+
         rasol = ret[0]
         delsol = ret[1]
 
@@ -335,7 +335,7 @@ class doppler_nanten (object):
     	solx[1] = a*math.sin(rasol)
     	solx[2] = math.sin(delsol)
 
-
+        """
     	solx1[0] = solx[0] - (solx[1] * math.cos(eps0) + solx[2] *	\
     			      math.sin(eps0)) * nut_long
     	solx1[1] = solx[1] + (solx[0] * math.cos(eps0) * nut_long\
@@ -350,7 +350,7 @@ class doppler_nanten (object):
     			      - solx[2] * nut_obliq)
     	solx1[2] = solx[2] + (solx[0] * math.sin(nut_obliq) * nut_long \
     			      + solx[1] * nut_obliq)
-        """
+
     	solv[0]=solx1[0]*20.
     	solv[1]=solx1[1]*20.
     	solv[2]=solx1[2]*20.
