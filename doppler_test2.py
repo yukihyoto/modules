@@ -51,11 +51,13 @@ class doppler_nanten (object):
             "REST_FREQ_CI3P2_1":809.3419700,
             #set speed [km/sec]
             "vlsr":0,
-            #Uppler ***sb*:1 , Lower ***sb*:-1
+            #Upper ***sb*:1 , Lower ***sb*:-1
             "1stsb1":1,
             "1stsb2":1,
+            #set frequency [GHz]
             "2ndLO1":8.038000000000,
             "2ndLO2":9.301318999999,
+            #set sg_power [dBm]
             "power_sg21":13.0,
             "power_sg22":13.0,
             #light speed [km/sec]
@@ -78,7 +80,7 @@ class doppler_nanten (object):
         #self.sg2if1 = SG.secondsg01()
         #self.sg2if2 = SG.secondsg02()
 
-
+        #use device_table
         """
         for record in csv.reader(open(PATH_DEVICE_TABLE,"r")):
             r_dict[record[0]] =record[1]
@@ -203,7 +205,8 @@ class doppler_nanten (object):
 
 
 
-
+        ra_2000=ra_2000*DEG2RAD
+        dec_2000=dec_2000*DEG2RAD
         a = math.cos(dec_2000)
         x_2000[0] = a*math.cos(ra_2000)
         x_2000[1] = a*math.sin(ra_2000)
@@ -227,9 +230,9 @@ class doppler_nanten (object):
         nut_obliq = ret[1]
         eps0 = ret[2]
 
-        x1[0]=x[0]-(x[1]*math.cos(eps0)+x[2]*math.sin(eps0))*nut_long
-        x1[1]=x[1]+x[0]*math.cos(eps0)*nut_long - x[2]*nut_obliq
-        x1[2]=x[2]+x[0]*math.sin(eps0)*nut_long + x[1]*nut_obliq
+        x1[0]=x[0]-(x[1]*math.cos(nut_obliq)+x[2]*math.sin(nut_obliq))*nut_long
+        x1[1]=x[1]+x[0]*math.cos(nut_obliq)*nut_long - x[2]*nut_obliq
+        x1[2]=x[2]+x[0]*math.sin(nut_obliq)*nut_long + x[1]*nut_obliq
 
         x[0]=x1[0]
         x[1]=x1[1]
@@ -323,11 +326,11 @@ class doppler_nanten (object):
     	solx[1] = a*math.sin(rasol)
     	solx[2] = math.sin(delsol)
 
-    	solx1[0] = solx[0] - (solx[1] * math.cos(eps0) + solx[2] *	\
-    			      math.sin(eps0)) * nut_long
-    	solx1[1] = solx[1] + (solx[0] * math.cos(eps0) * nut_long\
+    	solx1[0] = solx[0] - (solx[1] * math.cos(nut_obliq) + solx[2] *	\
+    			      math.sin(nut_obliq)) * nut_long
+    	solx1[1] = solx[1] + (solx[0] * math.cos(nut_obliq) * nut_long\
     			      - solx[2] * nut_obliq)
-    	solx1[2] = solx[2] + (solx[0] * math.sin(eps0) * nut_long \
+    	solx1[2] = solx[2] + (solx[0] * math.sin(nut_obliq) * nut_long \
     			      + solx[1] * nut_obliq)
 
     	solv[0]=solx1[0]*20.
