@@ -175,17 +175,17 @@ class doppler_nanten (object):
         solx1 = [0.,0.,0.]
         solv = [0.,0.,0.]
         DEG2RAD = math.pi/180.
-        SEC2RAD = 2*math.pi/24.*60.*60.
+        SEC2RAD = (2*math.pi)/(24.*60.*60.)
         ARCSEC2RAD = math.pi/(180.*3600.)
         RAD2DEG = 180./math.pi
         #1.85m at nobeyama
         #glongitude = 138.472153 * math.pi/180.
         #nanten2 at atacama (nanten2wiki)
-        glongitude = -67.70308139 * math.pi/180.
+        glongitude = -67.70308139 * DEG2RAD
         #1.85m at nobeyama
         #glatitude = 35.940874 * math.pi/180.
         #nanten2 at atacama (nanten2wiki)
-        glatitude = -22.96995611 * math.pi/180.
+        glatitude = -22.96995611 * DEG2RAD
         #1.85m at nobeyama
         #gheight = 1386
         #nanten2 at atacama
@@ -317,7 +317,7 @@ class doppler_nanten (object):
     	rasol=18.*15. *DEG2RAD
     	delsol=30.*DEG2RAD
 
-    	ret = slalib.sla_preces( "FK4", 1900.,2000.+tu*100., rasol, delsol)
+    	ret = slalib.sla_preces( "FK4", 1950.,2000.+tu*100., rasol, delsol)
         rasol = ret[0]
         delsol = ret[1]
 
