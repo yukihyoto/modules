@@ -124,8 +124,8 @@ class doppler_nanten (object):
         print("vobs=",vobs,"Vdiff=",Vdiff,"Fdiff=",Fdiff)
         return vobs,Vdiff,Fdiff
 
-    def set_track_old(self, x, y, coord, vlsr,
-                  offset_x, offset_y, offset_dcos, offset_coord, stime,secofday=35412.585):
+    def set_track_old(self, x=83.806130, y=-5.3743201, coord="LB", vlsr=0,
+                  offset_x=0, offset_y=0, offset_dcos=0, offset_coord="LB", stime=0,secofday=35412.585):
         """
         setting 2ndLO
         """
@@ -252,7 +252,7 @@ class doppler_nanten (object):
 
         ranow=ra_2000
         delnow=dec_2000
-        ret =slalib.sla_preces( "FK5", 2000.,2000.+tu*100.,ranow,delnow)
+        ret =slalib.sla_preces("FK5", 2000.,2000.+tu*100.,ranow,delnow)
         ranow = ret[0]
         delnow = ret[1]
 
@@ -315,7 +315,7 @@ class doppler_nanten (object):
 
     	am = 18.*3600.+41.*60.+50.54841+8640184.812866*tu +0.093104*tu*tu-0.0000062*tu*tu*tu
 
-    	gmst = (jd - 0.5 - (jd - 0.5)) * 24. * 3600. + am - 12.*3600.
+    	gmst = (jd - 0.5 - long(jd - 0.5)) * 24. * 3600. + am - 12.*3600.
 
     	l = 280.4664*3600. + 129602771.36*tu - 1.093*tu*tu
     	l = l * ARCSEC2RAD
