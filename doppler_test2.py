@@ -132,8 +132,8 @@ class doppler_nanten (object):
         coord = self.coord_dict[coord]
         offset_coord = self.coord_dict[offset_coord]
         #2015/11/27 = 57367.25
-        mjd = 57367.25 + secofday/(24.*3600.)
-        vobs_mjd = mjd + stime/24./3600.
+        mjd = 57367.25 + secofday / (24.* 3600.)
+        vobs_mjd = mjd + stime / (24. * 3600.)
         vobs = self.get_vobs(vobs_mjd,math.radians(x),math.radians(y),coord,
                              offset_x, offset_y, offset_dcos, offset_coord)
         c = self.dic1["LIGHT_SPEED"]
@@ -241,8 +241,8 @@ class doppler_nanten (object):
 
 
 
-        ra_2000=ra_2000*DEG2RAD
-        dec_2000=dec_2000*DEG2RAD
+        #ra_2000=ra_2000*DEG2RAD
+        #dec_2000=dec_2000*DEG2RAD
         a = math.cos(dec_2000)
         x_2000[0] = a*math.cos(ra_2000)
         x_2000[1] = a*math.sin(ra_2000)
