@@ -124,8 +124,8 @@ class doppler_nanten (object):
         print("vobs=",vobs,"Vdiff=",Vdiff,"Fdiff=",Fdiff)
         return vobs,Vdiff,Fdiff
 
-    def set_track_old(self, x=83.806130, y=-5.3743201, coord="LB", vlsr=0,
-                  offset_x=0, offset_y=0, offset_dcos=0, offset_coord="LB", stime=0, secofday=35412.585):
+    def set_track_old(self, x, y, coord, vlsr,
+                  offset_x, offset_y, offset_dcos, offset_coord, stime,secofday=35412.585):
         """
         setting 2ndLO
         """
@@ -298,12 +298,8 @@ class doppler_nanten (object):
         v[1] = r*ramda1*math.cos(ramda) + r1*math.sin(ramda)
         v[2] = r * beta
 
-        v[0]    = v[0] - (0.263 * math.cos((3034.9*tu+124.4)*DEG2RAD) \
-                    +0.058 * math.cos((1222. *tu+140.)*DEG2RAD) \
-                    +0.013 * math.cos((6069. *tu+144.)*DEG2RAD))
-    	v[1]    = v[1] - (0.263 * math.cos((3034.9*tu+34.4)*DEG2RAD) \
-                    +0.058 * math.cos((1222. *tu+50.)*DEG2RAD) \
-                    +0.013 * math.cos((6069. *tu+54.)*DEG2RAD))
+        v[0]    = v[0] - (0.263 * math.cos((3034.9*tu+124.4)*DEG2RAD) +0.058 * math.cos((1222. *tu+140.)*DEG2RAD) +0.013 * math.cos((6069. *tu+144.)*DEG2RAD))
+    	v[1]    = v[1] - (0.263 * math.cos((3034.9*tu+34.4)*DEG2RAD) +0.058 * math.cos((1222. *tu+50.)*DEG2RAD) +0.013 * math.cos((6069. *tu+54.)*DEG2RAD))
 
     	v[0] = v[0] * v0
     	v[1] = v[1] * v0
@@ -315,16 +311,13 @@ class doppler_nanten (object):
     	v_rev[1] = v[1] * math.cos(e * ARCSEC2RAD) - v[2] * math.sin(e * ARCSEC2RAD)
     	v_rev[2] = v[1] * math.sin(e * ARCSEC2RAD) + v[2] * math.cos(e * ARCSEC2RAD)
 
-    	v_e = (465.1e-3) * (1.+0.0001568*gheight/1000.) \
-    	  * math.cos(glatitude)/math.sqrt(1.+0.0066945*math.pow(math.sin(glatitude),2.0))
+    	v_e = (465.1e-3) * (1.+0.0001568*gheight/1000.) * math.cos(glatitude)/math.sqrt(1.+0.0066945*math.pow(math.sin(glatitude),2.0))
 
-    	am = 18.*3600.+41.*60.+50.54841+8640184.812866*tu \
-    	               +0.093104*tu*tu-0.0000062*tu*tu*tu
+    	am = 18.*3600.+41.*60.+50.54841+8640184.812866*tu +0.093104*tu*tu-0.0000062*tu*tu*tu
 
     	gmst = (jd - 0.5 - (jd - 0.5)) * 24. * 3600. + am - 12.*3600.
 
-    	l = 280.4664*3600. + 129602771.36*tu \
-                      - 1.093*tu*tu
+    	l = 280.4664*3600. + 129602771.36*tu - 1.093*tu*tu
     	l = l * ARCSEC2RAD
     	p = (282.937+1.720*tu)*3600.
     	p = p * ARCSEC2RAD
@@ -335,12 +328,7 @@ class doppler_nanten (object):
     	ll = ll*ARCSEC2RAD
     	pp = (83.353+4069.014*tu-0.010*tu*tu)*3600.
     	pp = pp*ARCSEC2RAD
-    	dpsi = (-17.1996-0.01742*tu)*math.sin(w) + \
-                 (-1.3187)*math.sin(2*l)+0.2062*math.sin(2*w) \
-                 +0.1426*math.sin(l-p)-0.0517*math.sin(3*l-p)+0.0217*math.sin(l+p) \
-                 +0.0129*math.sin(2*l-w)-0.2274*math.sin(2*ll)+0.0712*math.sin(ll-pp) \
-                 -0.0386*math.sin(2*ll-w)-0.0301*math.sin(3*ll-pp) \
-                 -0.0158*math.sin(-ll+3*l-pp)+0.0123*math.sin(ll+pp)
+    	dpsi = (-17.1996-0.01742*tu)*math.sin(w) + (-1.3187)*math.sin(2*l)+0.2062*math.sin(2*w) +0.1426*math.sin(l-p)-0.0517*math.sin(3*l-p)+0.0217*math.sin(l+p) +0.0129*math.sin(2*l-w)-0.2274*math.sin(2*ll)+0.0712*math.sin(ll-pp) -0.0386*math.sin(2*ll-w)-0.0301*math.sin(3*ll-pp) -0.0158*math.sin(-ll+3*l-pp)+0.0123*math.sin(ll+pp)
     	e = e  * ARCSEC2RAD
 
     	dpsicose = dpsi * math.cos(e)
@@ -380,12 +368,9 @@ class doppler_nanten (object):
     	#		      + solx[1] * nut_obliq)
 
 
-    	solx1[0] = solx[0] - (solx[1] * math.cos(nut_obliq) + solx[2] *	\
-    			      math.sin(nut_obliq)) * nut_long
-    	solx1[1] = solx[1] + (solx[0] * math.cos(nut_obliq) * nut_long\
-    			      - solx[2] * nut_obliq)
-    	solx1[2] = solx[2] + (solx[0] * math.sin(nut_obliq) * nut_long \
-    			      + solx[1] * nut_obliq)
+    	solx1[0] = solx[0] - (solx[1] * math.cos(nut_obliq) + solx[2] * math.sin(nut_obliq)) * nut_long
+    	solx1[1] = solx[1] + (solx[0] * math.cos(nut_obliq) * nut_long - solx[2] * nut_obliq)
+    	solx1[2] = solx[2] + (solx[0] * math.sin(nut_obliq) * nut_long + solx[1] * nut_obliq)
 
     	solv[0]=solx1[0]*20.
     	solv[1]=solx1[1]*20.
