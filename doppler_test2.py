@@ -157,7 +157,43 @@ class doppler_nanten (object):
         Fdiff = {"sg21":fdiff_21, "sg22":fdiff_22}
         print("vobs=",vobs,"Vdiff=",Vdiff,"Fdiff=",Fdiff)
         return vobs,Vdiff,Fdiff
+        
+        def set_track_old2(self, x=83.806130, y=-5.3743201, coord="J2000", offset_x=0, offset_y=0, offset_dcos=0, offset_coord="J2000", stime=0,secofday=35412.585):
+        """
+        setting 2ndLO
+        """
+        coord = self.coord_dict[coord]
+        offset_coord = self.coord_dict[offset_coord]
+        #2015/11/27 = 57367.25
+        mjd = 57353 + secofday / (24.* 3600.)
+        vobs_mjd = mjd + stime / (24. * 3600.)
+        vobs = self.get_vobs(vobs_mjd,math.radians(x),math.radians(y),coord,
+                             offset_x, offset_y, offset_dcos, offset_coord)
+        c = self.dic1["LIGHT_SPEED"]
+        for band in range(1, self.dic1["bandnum"]+1):
+            rf = self.dic1["restFreq"]
+            vdiff = vobs - self.dic1["vlsr"]
+            fdiff = vdiff / c * rf
+            if self.dic1["1stsb%d"%(band)] == 1:
+                sb = 1
+            if self.dic1["1stsb%d"%(band)] == -1:
+                sb = -1
+            set_freq = self.dic1["2ndLO%d"%(band)] + sb * fdiff
+            if band == 1:
+                #self.sg2if1.set_sg(dic1["set_freq"],dic1["power_sg21"])
+                vdiff_21 = vdiff
+                fdiff_21 = fdiff
+            elif band == 2:
+                #self.sg2if2.set_sg(dic1["set_freq"],dic1["power_sg22"])
+                vdiff_22 = vdiff
+                fdiff_22 = fdiff
 
+        Vdiff = {"sg21":vdiff_21, "sg22":vdiff_22}
+        Fdiff = {"sg21":fdiff_21, "sg22":fdiff_22}
+        print("vobs=",vobs,"Vdiff=",Vdiff,"Fdiff=",Fdiff)
+        return vobs,Vdiff,Fdiff
+        
+        
     """
     def get_status(self):
         freq_sg = self.sg.freq_check()
