@@ -89,8 +89,7 @@ class doppler_nanten (object):
 
         pass
 
-    def set_track(self, x, y, coord, vlsr,
-                  offset_x, offset_y, offset_dcos, offset_coord, stime):
+    def set_track(self, x, y, coord, offset_x, offset_y, offset_dcos, offset_coord, stime):
         """
         setting 2ndLO
         """
