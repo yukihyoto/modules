@@ -123,8 +123,7 @@ class doppler_nanten (object):
         print("vobs=",vobs,"Vdiff=",Vdiff,"Fdiff=",Fdiff)
         return vobs,Vdiff,Fdiff
 
-    def set_track_old(self, x=83.806130, y=-5.3743201, coord="LB", vlsr=0,
-                  offset_x=0, offset_y=0, offset_dcos=0, offset_coord="LB", stime=0,secofday=35412.585):
+    def set_track_old(self, x=83.806130, y=-5.3743201, coord="LB", offset_x=0, offset_y=0, offset_dcos=0, offset_coord="LB", stime=0,secofday=35412.585):
         """
         setting 2ndLO
         """
