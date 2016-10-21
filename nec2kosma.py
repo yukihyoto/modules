@@ -8,7 +8,7 @@ import controller.py
 def read_cookie():
   pass
  
- def write_cookie():
+def write_cookie():
   pass
  
 
